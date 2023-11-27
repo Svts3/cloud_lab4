@@ -18,12 +18,14 @@ resource "aws_appautoscaling_policy" "ecs_service_auto_scaling_up" {
     adjustment_type         = "ChangeInCapacity"
     cooldown                = 300
     step_adjustment {
+      metric_interval_upper_bound = ""
       metric_interval_lower_bound = 50
       scaling_adjustment          = 1
     }
     step_adjustment {
-      metric_interval_upper_bound = 100
-      scaling_adjustment = 1
+      metric_interval_lower_bound = 20
+      metric_interval_upper_bound = 50
+      scaling_adjustment = 0
     }
     
   }
@@ -39,12 +41,15 @@ resource "aws_appautoscaling_policy" "ecs_service_auto_scaling_down" {
     adjustment_type         = "ChangeInCapacity"
     cooldown                = 300
     step_adjustment {
-      metric_interval_lower_bound = 0
+      metric_interval_upper_bound = 20
+      metric_interval_lower_bound = ""
       scaling_adjustment          = -1
     }
     step_adjustment {
-     metric_interval_upper_bound = 20
-     scaling_adjustment = -1 
-    }    
+      metric_interval_lower_bound = 20
+      metric_interval_upper_bound = 50
+      scaling_adjustment = 0
+    }
+        
   }
 }
