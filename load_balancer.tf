@@ -20,4 +20,8 @@ resource "aws_lb_target_group" "load_balancer_target_group" {
   port        = 80
   protocol    = "HTTP"
   vpc_id      = aws_vpc.vpc.id
+  health_check {
+    port = 8080
+    protocol = "HTTP"
+  }
 }
