@@ -50,6 +50,11 @@ resource "aws_appautoscaling_policy" "ecs_service_auto_scaling_down" {
       metric_interval_upper_bound = 50
       scaling_adjustment = 0
     }
+    step_adjustment {
+      metric_interval_upper_bound = ""
+      metric_interval_lower_bound = 50
+      scaling_adjustment = 0
+    }
         
   }
 }
