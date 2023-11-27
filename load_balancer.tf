@@ -7,7 +7,7 @@ resource "aws_lb" "load_balancer" {
 
 resource "aws_lb_listener" "load_balancer_listener" {
   load_balancer_arn = aws_lb.load_balancer.arn
-  port              = 80
+  port              = 8080
   protocol          = "HTTP"
   default_action {
     target_group_arn = aws_lb_target_group.load_balancer_target_group.arn
@@ -17,7 +17,7 @@ resource "aws_lb_listener" "load_balancer_listener" {
 resource "aws_lb_target_group" "load_balancer_target_group" {
   name        = "ecs-target-group"
   target_type = "ip"
-  port        = 80
+  port        = 8080
   protocol    = "HTTP"
   vpc_id      = aws_vpc.vpc.id
   health_check {
