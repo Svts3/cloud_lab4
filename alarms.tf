@@ -27,7 +27,7 @@ resource "aws_cloudwatch_metric_alarm" "scale_down_alarm" {
   namespace                 = "AWS/ECS"
   period                    = 60
   statistic                 = "Average"
-  threshold                 = 10
+  threshold                 = 20
   insufficient_data_actions = []
   dimensions = {
     "ClusterName" = aws_ecs_cluster.ecs_cluster.name

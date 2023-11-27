@@ -19,7 +19,7 @@ resource "aws_appautoscaling_policy" "ecs_service_auto_scaling_up" {
     cooldown                = 300
     step_adjustment {
       metric_interval_upper_bound = 100
-      metric_interval_lower_bound = 50
+      metric_interval_lower_bound = aws_cloudwatch_metric_alarm.scale_up_alarm.threshold
       scaling_adjustment          = 1
     }
     
@@ -36,7 +36,7 @@ resource "aws_appautoscaling_policy" "ecs_service_auto_scaling_down" {
     adjustment_type         = "ChangeInCapacity"
     cooldown                = 300
     step_adjustment {
-      metric_interval_upper_bound = 20
+      metric_interval_upper_bound = aws_cloudwatch_metric_alarm.scale_down_alarm.threshold
       metric_interval_lower_bound = 0
       scaling_adjustment          = -1
     }
