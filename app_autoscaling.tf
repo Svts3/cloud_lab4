@@ -35,6 +35,7 @@ resource "aws_appautoscaling_policy" "ecs_service_auto_scaling_down" {
     cooldown                = 300
     step_adjustment {
       metric_interval_upper_bound = 20
+      metric_interval_lower_bound = 0
       scaling_adjustment          = -1
     }
   }
