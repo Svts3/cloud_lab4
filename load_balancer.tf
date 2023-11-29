@@ -21,15 +21,28 @@ resource "aws_lb_target_group" "load_balancer_target_group" {
   protocol    = "HTTP"
   vpc_id      = aws_vpc.vpc.id
   health_check {
-    matcher = 401
-    port = 8080
+    matcher  = 401
+    port     = 8080
     protocol = "HTTP"
   }
 }
-resource "aws_lb_cookie_stickiness_policy" "stickiness_policy" {
-  name = "lb_stickiness_policy"
-  lb_port = aws_lb_listener.load_balancer_listener.port
-  load_balancer = aws_lb.load_balancer.id
-  cookie_expiration_period = 600
-  depends_on = [ aws_lb.load_balancer ]
+resource "aws_lb_listener_rule" "stickiness_policy" {
+  listener_arn = aws_lb_listener.load_balancer_listener.arn
+  action {
+    type = "forward"
+    forward {
+      target_group {
+        arn = aws_lb_target_group.load_balancer_target_group.arn
+      }
+      stickiness {
+        duration = 600
+        enabled = true
+      }
+    }
+  }
+  condition {
+    
+  }
+ 
+
 }
