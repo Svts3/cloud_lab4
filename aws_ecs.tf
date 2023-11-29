@@ -22,8 +22,8 @@ resource "aws_ecs_task_definition" "ecs_task_definition" {
         ],
         environment = [
           { "name" : "db_url", "value" : "jdbc:mysql://${aws_db_instance.rds_instance.endpoint}/lab_database" },
-          { "name" : "db_username", "value" : "admin" },
-          { "name" : "db_password", "value" : "admin1224" }
+          { "name" : "db_username", "value" : "${var.db_username}" },
+          { "name" : "db_password", "value" : "${var.db_password}" }
         ]
       },
 
@@ -56,6 +56,7 @@ resource "aws_ecs_cluster" "ecs_cluster" {
 
 resource "aws_ecs_service" "ecs_cluster_service" {
   name = "back-end-service"
+  force_new_deployment = true
   network_configuration {
     assign_public_ip = true
     security_groups  = [aws_security_group.ecs_security_group.id]

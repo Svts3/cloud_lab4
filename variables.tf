@@ -6,11 +6,13 @@ variable "ecr_repository_name" {
 variable "db_username" {
   type = string
   sensitive = true
+  default = "admin"
   
 }
 variable "db_password" {
   type = string
   sensitive = true
+  default = "admin1224"
   
 }
 
