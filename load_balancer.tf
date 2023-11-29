@@ -27,3 +27,9 @@ resource "aws_lb_target_group" "load_balancer_target_group" {
     protocol = "HTTP"
   }
 }
+resource "aws_lb_cookie_stickiness_policy" "stickiness_policy" {
+  name = "lb_stickiness_policy"
+  lb_port = aws_lb_listener.load_balancer_listener.port
+  load_balancer = aws_lb.load_balancer.id
+  cookie_expiration_period = 600
+}
