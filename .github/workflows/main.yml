@@ -9,6 +9,16 @@ permissions:
   contents: read
 
 jobs:
+  trigger-backend:
+      runs-on: ubuntu-latest
+  
+      steps:
+        - name: Dispatch backend update event
+          uses: peter-evans/repository-dispatch@v1
+          with:
+            token: ${{ secrets.BACKEND_REPO_ACCESS_TOKEN }} 
+            repository: Svts3/cloud_lab4_back_end
+            event-type: update-backend
   terraform:
     name: 'Terraform'
     runs-on: ubuntu-latest
