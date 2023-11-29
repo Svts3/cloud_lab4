@@ -12,6 +12,15 @@ resource "aws_lb_listener" "load_balancer_listener" {
   default_action {
     target_group_arn = aws_lb_target_group.load_balancer_target_group.arn
     type             = "forward"
+    forward {
+      target_group {
+        arn = aws_lb_target_group.load_balancer_target_group.arn
+      }
+      stickiness {
+        duration = 600
+        enabled = true
+      }
+    }
   }
 }
 resource "aws_lb_target_group" "load_balancer_target_group" {
@@ -25,24 +34,4 @@ resource "aws_lb_target_group" "load_balancer_target_group" {
     port     = 8080
     protocol = "HTTP"
   }
-}
-resource "aws_lb_listener_rule" "stickiness_policy" {
-  listener_arn = aws_lb_listener.load_balancer_listener.arn
-  action {
-    type = "forward"
-    forward {
-      target_group {
-        arn = aws_lb_target_group.load_balancer_target_group.arn
-      }
-      stickiness {
-        duration = 600
-        enabled = true
-      }
-    }
-  }
-  condition {
-    
-  }
- 
-
 }
