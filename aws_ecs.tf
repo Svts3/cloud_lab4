@@ -56,7 +56,6 @@ resource "aws_ecs_cluster" "ecs_cluster" {
 
 resource "aws_ecs_service" "ecs_cluster_service" {
   name = "back-end-service"
-  deployment_minimum_healthy_percent = 0
   force_new_deployment = true
   network_configuration {
     assign_public_ip = true
