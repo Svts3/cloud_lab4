@@ -21,7 +21,7 @@ resource "aws_lb_target_group" "load_balancer_target_group" {
   protocol    = "HTTP"
   vpc_id      = aws_vpc.vpc.id
   health_check {
-    matcher  = 401
+    path = "/health-check"
     port     = 8080
     protocol = "HTTP"
   }
