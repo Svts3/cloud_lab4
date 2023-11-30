@@ -12,15 +12,6 @@ resource "aws_lb_listener" "load_balancer_listener" {
   default_action {
     target_group_arn = aws_lb_target_group.load_balancer_target_group.arn
     type             = "forward"
-    forward {
-      target_group {
-        arn = aws_lb_target_group.load_balancer_target_group.arn
-      }
-      stickiness {
-        duration = 600
-        enabled = true
-      }
-    }
   }
 }
 resource "aws_lb_target_group" "load_balancer_target_group" {
