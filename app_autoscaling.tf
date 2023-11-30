@@ -18,11 +18,11 @@ resource "aws_appautoscaling_policy" "ecs_service_auto_scaling_up" {
     adjustment_type         = "ChangeInCapacity"
     cooldown                = 300
     step_adjustment {
-      
+
       metric_interval_lower_bound = 0
       scaling_adjustment          = 1
     }
-    
+
   }
 }
 resource "aws_appautoscaling_policy" "ecs_service_auto_scaling_down" {
@@ -39,6 +39,6 @@ resource "aws_appautoscaling_policy" "ecs_service_auto_scaling_down" {
       metric_interval_upper_bound = 0
       scaling_adjustment          = -1
     }
-        
+
   }
 }

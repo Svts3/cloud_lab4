@@ -1,8 +1,8 @@
 terraform {
   cloud {
-    organization = "svsts3" 
+    organization = "svsts3"
     workspaces {
-      name = "lab4-workspace" 
+      name = "lab4-workspace"
     }
   }
   required_providers {
