@@ -20,6 +20,11 @@ resource "aws_lb_target_group" "load_balancer_target_group" {
   port        = 8080
   protocol    = "HTTP"
   vpc_id      = aws_vpc.vpc.id
+  stickiness {
+    enabled = true
+    cookie_duration = 3600
+    type = "lb_cookie"
+  }
   health_check {
     path     = "/health-check"
     port     = 8080
